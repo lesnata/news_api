@@ -1,38 +1,38 @@
-from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework.authentication import TokenAuthentication, BasicAuthentication
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.decorators import api_view, authentication_classes, \
+    permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
-from .serializers import *
-from .models import *
+from .serializers import RegistrationSerializer, NewsSerializer, \
+    CommentSerializer
+from .models import News, Comment
 
 
-""" 
+
+"""
 RESTful Structure for News:
-/news/:              [COLLECTION]
+/api/news/:              [COLLECTION]
     -> GET all news
     -> POST new news
-/news/<slug>:          [ELEMENT]
+/api/news/<slug>:          [ELEMENT]
     -> GET news/slug
     -> PUT news/slug
     -> DELETE news/slug
-    
-
 RESTful Structure for Comments:
-
-/comment/:          [COLLECTION]
+/api/comment/:          [COLLECTION]
     -> POST comment
-    
-/comment/<id>:          [ELEMENT]
+/api/comment/<id>:          [ELEMENT]
     -> GET comment/id
     -> PUT comment/id
     -> DELETE comment/id
-
-
+RESTful Structure for Upvote:
+/api/upvote/<id>: 
+    -> PUT upvote
+    
 """
 
 
@@ -46,11 +46,10 @@ def registration(request):
         serializer.save()
         user = User.objects.get(username=serializer.data["username"])
         user.is_activated = True
-
-# TODO: user authentication by default
-
+        # TODO New registered user needs manual 'Activate' box ticking in Admin panel
         username = serializer.data["username"]
         email = serializer.data["email"]
+        # TODO enable automatic Token generation in models.py with @receiver(post_save)
         token = Token.objects.create(user=user)
 
         data["username"] = username
@@ -59,12 +58,6 @@ def registration(request):
         return Response(data)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-# def create_auth_token(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         Token.objects.create(user=instance)
 
 
 @api_view(['GET', 'POST'])
@@ -181,8 +174,8 @@ def upvote(request, id):
     upvote_count = news.upvote
     upvote_count += 1
     upvoted_data = {
-        # 'title': request.data['title'],
-        #         # 'link': request.data['link'],
+        'title': request.data['title'],
+        'link': request.data['link'],
         'upvote': upvote_count,
     }
 
@@ -194,30 +187,3 @@ def upvote(request, id):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# @api_view(['POST'])
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# def upvote(request, id):
-#     try:
-#         user = request.user
-#         news = News.objects.get(id=id)
-#     except News.DoesNotExist or user in None:
-#         return HttpResponse(status=404)
-#
-#     upvote_count = news.upvote
-#     upvote_count += 1
-#     upvoted_data = {
-#         'title': request.data['title'],
-#         'link': request.data['link'],
-#         'upvote': upvote_count,
-#     }
-#     serializer = NewsSerializer(news, data=upvoted_data)
-#
-#     if serializer.is_valid():
-#         serializer.save()
-#         return Response(serializer.data, status=status.HTTP_201_CREATED)
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-def upvote_reset():
-    pass

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import *
+from .models import Comment, News
 from django.contrib.auth.models import User
 
 
@@ -19,4 +19,3 @@ class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
-
