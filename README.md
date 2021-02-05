@@ -30,7 +30,7 @@ https://www.getpostman.com/collections/ff6e8490c84b1a5916ae
 ##### REGISTRATION
 
 /api/account/register -> POST request for a new user
-NOTE: new registered account needs to be approved manually. Please, refer to 'TODO refactor' section
+- new registered account needs to be approved manually. Please, refer to 'TODO refactor' section
 
 ##### NEWS
 
