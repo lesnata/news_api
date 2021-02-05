@@ -25,38 +25,27 @@ https://www.getpostman.com/collections/ff6e8490c84b1a5916ae
 
 ## Endpoints
 
-REGISTRATION
+##### REGISTRATION
 
-/api/account/register:
-    -> POST request for a new user
+/api/account/register -> POST request for a new user
 * new registered account needs to be approved manually. Please, refer to 'TODO refactor' section
 
-NEWS
+##### NEWS
 
-[COLLECTION] /api/news/:              
-    -> GET all news
-    -> POST new news
+[COLLECTION] /api/news/:  -> GET all news | POST new news
     
-[ELEMENT]/news/<id>:          
-    -> GET news/id
-    -> PUT news/id
-    -> DELETE news/id
+[ELEMENT] /news/<id>:  -> GET news/id | PUT news/id | DELETE news/id
     
    
-COMMENTS
+##### COMMENTS
 
-[COLLECTION] /api/news/<news_id>/comment:          
-    -> POST comment
+[COLLECTION] /api/news/<news_id>/comment: -> POST comment
     
-[ELEMENT] /api/comment/<id>:          
-    -> GET comment/id
-    -> PUT comment/id
-    -> DELETE comment/id
+[ELEMENT] /api/comment/<id>: -> GET comment/id | PUT comment/id | DELETE comment/id
     
-UPVOTE
+##### UPVOTE
 
-[ELEMENT] /api/upvote/<news_id>
--> PUT upvote/id
+[ELEMENT] /api/upvote/<news_id> | -> PUT upvote/id
 
 
 ## Technologies
@@ -82,10 +71,11 @@ $ (env)$ python manage.py runserver
 
 
 ## TODO refactor:
-- New registered user needs manual 'Activate' box ticking in Admin panel. Need to set it automatically
+- New registered user needs manual 'Activate' box ticking in Admin panel. Need to set it automatically.
 For test requests please use in Headers:
+
 ```Authorisation: Token 11ecdb72f09813fcb4896d984f6231b41d81226c ```
-- views.py - Enable automatic Token generation in models.py with @receiver(post_save)
+- views.py/registration - Enable automatic Token generation in models.py with @receiver(post_save)
 - views.py/news_element/PUT - make only one field update necessary
 - views.py/news_element/DELETE - add info message when deleted
 - views.py/upvote/PUT - make body params unnecessary
