@@ -26,29 +26,35 @@ https://www.getpostman.com/collections/ff6e8490c84b1a5916ae
 ## Endpoints
 
 REGISTRATION
+
 /api/account/register:
     -> POST request for a new user
-* new registered account needs to be approved manually.
-Please, refer to 'TODO refactor' section
+* new registered account needs to be approved manually. Please, refer to 'TODO refactor' section
 
 NEWS
+
 [COLLECTION] /api/news/:              
     -> GET all news
     -> POST new news
+    
 [ELEMENT]/news/<id>:          
     -> GET news/id
     -> PUT news/id
     -> DELETE news/id
     
+   
 COMMENTS
+
 [COLLECTION] /api/news/<news_id>/comment:          
     -> POST comment
+    
 [ELEMENT] /api/comment/<id>:          
     -> GET comment/id
     -> PUT comment/id
     -> DELETE comment/id
     
 UPVOTE
+
 [ELEMENT] /api/upvote/<news_id>
 -> PUT upvote/id
 
