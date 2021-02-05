@@ -29,7 +29,7 @@ https://www.getpostman.com/collections/ff6e8490c84b1a5916ae
 
 ##### REGISTRATION
 
-/api/account/register -> POST request for a new user
+/api/account/register -> POST request to create a new user
 - new registered account needs to be approved manually. Please, refer to 'TODO refactor' section
 For test requests please use in Headers:
 
