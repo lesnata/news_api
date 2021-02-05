@@ -2,6 +2,8 @@
 * [General info](#general-info)
 * [Link to project](#link-to-project)
 * [Postman collection](#postman-collection)
+* [Functionality](#functionality)
+* [Endpoints](#endpoints)
 * [Technologies](#technologies)
 * [Setup](#setup)
 
@@ -28,24 +30,24 @@ https://www.getpostman.com/collections/ff6e8490c84b1a5916ae
 ##### REGISTRATION
 
 /api/account/register -> POST request for a new user
-* new registered account needs to be approved manually. Please, refer to 'TODO refactor' section
+NOTE: new registered account needs to be approved manually. Please, refer to 'TODO refactor' section
 
 ##### NEWS
 
-[COLLECTION] /api/news/:  -> GET all news | POST new news
+[COLLECTION] /api/news/  -> GET all news | POST new news
     
-[ELEMENT] /news/<id>:  -> GET news/id | PUT news/id | DELETE news/id
+[ELEMENT] /news/<news_id>/  -> GET news/id | PUT news/id | DELETE news/id
     
    
 ##### COMMENTS
 
-[COLLECTION] /api/news/<news_id>/comment: -> POST comment
+[COLLECTION] /api/news/<news_id>/comment/ -> POST comment
     
-[ELEMENT] /api/comment/<id>: -> GET comment/id | PUT comment/id | DELETE comment/id
+[ELEMENT] /api/comment/<comment_id>/ -> GET comment/id | PUT comment/id | DELETE comment/id
     
 ##### UPVOTE
 
-[ELEMENT] /api/upvote/<news_id> | -> PUT upvote/id
+[ELEMENT] /api/upvote/<news_id>/ -> PUT upvote/id
 
 
 ## Technologies
