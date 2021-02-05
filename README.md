@@ -31,6 +31,9 @@ https://www.getpostman.com/collections/ff6e8490c84b1a5916ae
 
 /api/account/register -> POST request for a new user
 - new registered account needs to be approved manually. Please, refer to 'TODO refactor' section
+For test requests please use in Headers:
+
+```Authorisation: Token 11ecdb72f09813fcb4896d984f6231b41d81226c ```
 
 ##### NEWS
 
