@@ -28,7 +28,9 @@ SECRET_KEY = "super-secret-password"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['news-api-123.herokuapp.com']
+ALLOWED_HOSTS = ['news-api-123.herokuapp.com', '127.0.0.1']
+
+CELERY_BROKER_URL = 'amqp://'
 
 
 # Application definition
@@ -43,6 +45,8 @@ INSTALLED_APPS = [
     "api.apps.ApiConfig",
     "rest_framework",
     "rest_framework.authtoken",
+    "django_celery_beat",
+
 ]
 
 AUTH_USER_MODEL = "auth.User"
@@ -93,7 +97,7 @@ DATABASES = {
     }
 }
 
-
+#
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.sqlite3",

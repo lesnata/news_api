@@ -12,7 +12,6 @@ from .serializers import RegistrationSerializer, NewsSerializer, \
 from .models import News, Comment
 
 
-
 """
 RESTful Structure for News:
 /api/news/:              [COLLECTION]
@@ -30,9 +29,8 @@ RESTful Structure for Comments:
     -> PUT comment/id
     -> DELETE comment/id
 RESTful Structure for Upvote:
-/api/upvote/<id>: 
+/api/upvote/<id>:
     -> PUT upvote
-    
 """
 
 
@@ -46,10 +44,10 @@ def registration(request):
         serializer.save()
         user = User.objects.get(username=serializer.data["username"])
         user.is_activated = True
-        # TODO New registered user needs manual 'Activate' box ticking in Admin panel
+        # TODO New user needs manual 'Activate' box ticking in Admin panel
         username = serializer.data["username"]
         email = serializer.data["email"]
-        # TODO enable automatic Token generation in models.py with @receiver(post_save)
+        # TODO auto Token generation in models.py with @receiver(post_save)
         token = Token.objects.create(user=user)
 
         data["username"] = username
@@ -185,5 +183,3 @@ def upvote(request, id):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-

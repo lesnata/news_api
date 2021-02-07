@@ -10,7 +10,8 @@
 ## General info
 This project is simple news API app listing news with functionality to 
 upvote and comment on them. Similar platform to HackerNews.
-Including registration and Token request verification
+Including registration and Token request verification.
+All news upvotes are resetting to '0' at 00:00 daily as a recurring task.
 
 ## Link to project
 LIVE: https://news-api-123.herokuapp.com/api/account/register
@@ -60,6 +61,8 @@ Project is created with:
 * black==20.8b1
 * flake8==3.8.4
 * psycopg2-binary==2.8.6
+* django-celery-beat==2.2.0
+* celery==5.0.5
 	
 ## Setup
 To run this project locally, make the following:
@@ -80,8 +83,8 @@ $ (env)$ python manage.py runserver
 For test requests please use in Headers:
 
 ```Authorisation: Token 11ecdb72f09813fcb4896d984f6231b41d81226c ```
+- rewrite serializer with serializers.Serializer and read_only fields
 - views.py/registration - Enable automatic Token generation in models.py with @receiver(post_save)
 - views.py/news_element/PUT - make only one field update necessary
 - views.py/news_element/DELETE - add info message when deleted
 - views.py/upvote/PUT - make body params unnecessary
-- upvote_reset.py - Refactor with Celery: set up configuration, logic and docker-compose
